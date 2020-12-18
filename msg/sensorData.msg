@@ -1,0 +1,14 @@
+int8 contact1
+int8 contact2
+int8 contact3
+int8 safetyNotOK
+int8 sensor1Error1
+int8 sensor1Error2
+int8 sensor2Error1
+int8 sensor2Error2
+int8 sensor3Error1
+int8 sensor3Error2
+int8 safetyState
+int8 sensorICStatus
+int8 safetyOff
+int8 safetyOk
