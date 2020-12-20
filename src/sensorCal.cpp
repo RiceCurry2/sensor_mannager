@@ -1,12 +1,11 @@
 //---Includes---//---Includes---//---Includes---//---Includes---//---Includes---//---Includes---//---Includes---//---Includes---//
 
 #include "ros/ros.h"
-#include "std_msgs/String.h"
+#include "std_msgs/Int8MultiArray.h"
+#include "std_msgs/Int16MultiArray.h"
 
 #include <sstream>
 
-#include "sensor_mannager/sensorData.h"
-#include "sensor_mannager/sensorIO.h"
 
 //---Global variables---//---Global variables---//---Global variables---//---Global variables---//---Global variables---//
 
@@ -26,8 +25,8 @@
 
 //---Prototypes---//---Prototypes---//---Prototypes---//---Prototypes---//---Prototypes---//---Prototypes---//---Prototypes---//
 
-void chatterCallback(const sensor_mannager::sensorIO::ConstPtr&);
-void handlingCallback (const sensor_mannager::sensorData::ConstPtr& msg);
+void chatterCallback(const std_msgs::Int8MultiArray::ConstPtr&);
+void handlingCallback (const std_msgs::Int16MultiArray::ConstPtr& msg);
 
 //---Main---//---Main---//---Main---//---Main---//---Main---//---Main---//---Main---//---Main---//---Main---//---Main---//---Main---//
 
@@ -149,27 +148,27 @@ int main(int argc, char **argv)
 
 //---Callback for sensorIO---//
 
-void chatterCallback (const sensor_mannager::sensorIO::ConstPtr& msg)
+void chatterCallback (const std_msgs::Int8MultiArray::ConstPtr& msg)
 {
     // Copy message content to var
-    c_s1io = msg -> sensor1IO;
-    c_s2io = msg -> sensor2IO;
-    c_s3io = msg -> sensor3IO;
+    c_s1io = msg -> data[0]; // Sensor 1 ON/OFF
+    c_s2io = msg -> data[1]; // Sensor 2 ON/OFF
+    c_s3io = msg -> data[2]; // Sensor 3 ON/OFF
 }
 
 //---Callback for sensorData---//
 
-void handlingCallback (const sensor_mannager::sensorData::ConstPtr& msg)
+void handlingCallback (const std_msgs::Int16MultiArray::ConstPtr& msg)
 {
     // Copy message content to var
-    h_s1e1 = msg -> sensor1Error1;
-    h_s1e2 = msg -> sensor1Error2;
-    h_s2e1 = msg -> sensor2Error1;
-    h_s2e2 = msg -> sensor2Error2;
-    h_s3e1 = msg -> sensor3Error1;
-    h_s3e2 = msg -> sensor3Error2;
-    h_icst = msg -> sensorICStatus;
-    h_s1co = msg -> contact1;
-    h_s2co = msg -> contact2;
-    h_s3co = msg -> contact3;
+    h_s1e1 = msg -> data[6]; // sensor1Error1
+    h_s1e2 = msg -> data[7]; // sensor1Error2
+    h_s2e1 = msg -> data[8]; // sensor2Error1
+    h_s2e2 = msg -> data[9]; // sensor2Error2
+    h_s3e1 = msg -> data[10]; // sensor3Error1
+    h_s3e2 = msg -> data[11]; // sensor3Error2
+    h_icst = msg -> data[12]; // sensorICStatus
+    h_s1co = msg -> data[0]; // contact1
+    h_s2co = msg -> data[1]; // contact2
+    h_s3co = msg -> data[2]; // contact3
 }

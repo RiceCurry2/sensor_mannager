@@ -1,8 +1,9 @@
 //---Includes---//---Includes---//---Includes---//---Includes---//---Includes---//---Includes---//---Includes---//---Includes---//
 
 #include <stdio.h>
+#include <iostream>
+#include <cstdlib>
 
-#include "std_msgs/String.h"
 
 //---Prototypes---//---Prototypes---//---Prototypes---//---Prototypes---//---Prototypes---//---Prototypes---//---Prototypes---//
 
@@ -43,7 +44,7 @@ void ui()
                 break;
          case 2:
                 // Launch kayboard control via teleop aka keyboardteleop
-                system ("xterm -e 'roslaunch turtlebot_teleop keyboard_teleop.launch' & ");
+                system ("xterm -e 'roslaunch turtlebotteleop keyboardteleop.launch' & ");
                 break;
             case 3:
                 // Run map saver aka mapsaver

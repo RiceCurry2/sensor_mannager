@@ -1,12 +1,10 @@
 //---Includes---//---Includes---//---Includes---//---Includes---//---Includes---//---Includes---//---Includes---//---Includes---//
 
 #include "ros/ros.h"
-#include "std_msgs/String.h"
+#include "std_msgs/Int32MultiArray.h"
 
 #include <stdio.h>
 #include <sstream>
-
-#include "sensor_mannager/safetyIO.h"
 
 //---Main---//---Main---//---Main---//---Main---//---Main---//---Main---//---Main---//---Main---//---Main---//---Main---//---Main---//
 
@@ -18,10 +16,10 @@ int main(int argc, char **argv)
     ros::init(argc, argv, "safetyHandling");
     ros::NodeHandle nh;
 
-    ros::Publisher systemHandling_pub = nh.advertise<sensor_mannager::safetyIO>("safetyStateTopic", 1);
+    ros::Publisher systemHandling_pub = nh.advertise<std_msgs::Int32MultiArray>("safetyStateTopic", 1);
     ros::Rate loop_rate(100);
 
-    sensor_mannager::safetyIO msg;
+    std_msgs::Int32MultiArray msg;
 
     while((!done) && (ros::ok()))
     {
@@ -34,8 +32,9 @@ int main(int argc, char **argv)
 
         switch (selection)
         {
+            // Safety circuit ON
             case 1:
-            msg.safetyState = 1;
+            msg.data[0] = 1; // safetyState
 
             systemHandling_pub.publish(msg);
             ros::spinOnce;
@@ -43,8 +42,9 @@ int main(int argc, char **argv)
             std::cout << "Press any key + enter to return to menu" << std::endl;
             std::cin >> selection;
             break;
+            // Safety circuit OFF
             case 2:
-            msg.safetyState = 0;
+            msg.data[0] = 0; // safetyState
 
             systemHandling_pub.publish(msg);
             ros::spinOnce;
@@ -52,6 +52,7 @@ int main(int argc, char **argv)
             std::cout << "Press any key + enter to return to menu" << std::endl;
             std::cin >> selection;
             break;
+            // Exit loop
             case 0:
             done = 1;
             break;

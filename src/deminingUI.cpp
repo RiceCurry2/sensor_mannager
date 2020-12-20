@@ -1,8 +1,8 @@
 //---Includes---//---Includes---//---Includes---//---Includes---//---Includes---//---Includes---//---Includes---//---Includes---//
 
 #include <stdio.h>
-
-#include "std_msgs/String.h"
+#include <iostream>
+#include <cstdlib>
 
 //---Prototypes---//---Prototypes---//---Prototypes---//---Prototypes---//---Prototypes---//---Prototypes---//---Prototypes---//
 
@@ -39,7 +39,7 @@ void ui()
         {
             case 1:
                 // Launch deming system aka deminerdeminer
-                system ("xterm -e 'roslaunch deminer deminer.launch' & ");
+                system ("xterm -e 'roslaunch _deminer_client.launch' & ");
                 break;
          case 2:
                 // Run mapserver to retrive map aka mapserver
@@ -47,7 +47,7 @@ void ui()
                 break;
             case 3:
                 // Launch manual controls aka deminingmanualcontrol
-                system ("xterm -e 'roslaunch deminer manualcontrol.launch' & ");
+                system ("xterm -e 'roslaunch deminermanualcontrol.launch' & ");
                 break;
             case 0:
                 // Exit loop (ending program execution with return value "0")

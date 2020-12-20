@@ -1,12 +1,11 @@
 //---Includes---//---Includes---//---Includes---//---Includes---//---Includes---//---Includes---//---Includes---//---Includes---//
 
 #include "ros/ros.h"
-#include "std_msgs/String.h"
+#include "std_msgs/Int8MultiArray.h"
 
 #include <stdio.h>
 #include <sstream>
 
-#include "sensor_mannager/sensorIO.h"
 
 //---Main---//---Main---//---Main---//---Main---//---Main---//---Main---//---Main---//---Main---//---Main---//---Main---//---Main---//
 
@@ -17,12 +16,12 @@ int main(int argc, char **argv)
     ros::init(argc, argv, "systemHandling");
     ros::NodeHandle nh;
 
-    ros::Publisher systemHandling_pub = nh.advertise<sensor_mannager::sensorIO>("sensorStateTopic", 1);
+    ros::Publisher systemHandling_pub = nh.advertise<const std_msgs::Int8MultiArray>("sensorStateTopic", 1);
     ros::Rate loop_rate(100);
 
     //int done = 0;
     int selection = 0;
-    sensor_mannager::sensorIO msg;
+    std_msgs::Int8MultiArray msg;
 
 
     while((!done) && (ros::ok()))
@@ -45,10 +44,10 @@ int main(int argc, char **argv)
         switch (selection)
         {
             case 1:
-            // Publish sensor state ON fon sensor 1+2+3
-            msg.sensor1IO = 1;
-            msg.sensor2IO = 1;
-            msg.sensor3IO = 1;
+            // Publish sensor state ON for sensor 1+2+3
+            msg.data[0] = 1;
+            msg.data[1] = 1;
+            msg.data[2] = 1;
 
             systemHandling_pub.publish(msg);
             ros::spinOnce;
@@ -57,10 +56,10 @@ int main(int argc, char **argv)
             std::cin >> selection;
             break;
             case 2:
-            // Publish sensor state OFF fon sensor 1+2+3
-            msg.sensor1IO = 0;
-            msg.sensor2IO = 0;
-            msg.sensor3IO = 0;
+            // Publish sensor state OFF for sensor 1+2+3
+            msg.data[0] = 0;
+            msg.data[1] = 0;
+            msg.data[2] = 0;
 
             systemHandling_pub.publish(msg);
             ros::spinOnce;
@@ -69,8 +68,8 @@ int main(int argc, char **argv)
             std::cin >> selection;
             break;
             case 3:
-            // Publish sensor state ON fon sensor 1
-            msg.sensor1IO = 1;
+            // Publish sensor state ON for sensor 1
+            msg.data[0] = 1;
 
             systemHandling_pub.publish(msg);
             ros::spinOnce;
@@ -79,8 +78,8 @@ int main(int argc, char **argv)
             std::cin >> selection;
             break;
             case 4:
-            // Publish sensor state OFF fon sensor 1
-            msg.sensor1IO = 0;
+            // Publish sensor state OFF for sensor 1
+            msg.data[0] = 0;
 
             systemHandling_pub.publish(msg);
             ros::spinOnce;
@@ -89,8 +88,8 @@ int main(int argc, char **argv)
             std::cin >> selection;
             break;
             case 5:
-            // Publish sensor state ON fon sensor 2
-            msg.sensor2IO = 1;
+            // Publish sensor state ON for sensor 2
+            msg.data[1] = 1;
 
             systemHandling_pub.publish(msg);
             ros::spinOnce;
@@ -99,8 +98,8 @@ int main(int argc, char **argv)
             std::cin >> selection;
             break;
             case 6:
-            // Publish sensor state OFF fon sensor 2
-            msg.sensor2IO = 0;
+            // Publish sensor state OFF for sensor 2
+            msg.data[1] = 0;
 
             systemHandling_pub.publish(msg);
             ros::spinOnce;
@@ -109,8 +108,8 @@ int main(int argc, char **argv)
             std::cin >> selection;
             break;
             case 7:
-            // Publish sensor state ON fon sensor 3
-            msg.sensor3IO = 1;
+            // Publish sensor state ON for sensor 3
+            msg.data[2] = 1;
 
             systemHandling_pub.publish(msg);
             ros::spinOnce;
@@ -119,8 +118,8 @@ int main(int argc, char **argv)
             std::cin >> selection;
             break;
             case 8:
-            // Publish sensor state OFF fon sensor 3
-            msg.sensor1IO = 0;
+            // Publish sensor state OFF for sensor 3
+            msg.data[2] = 0;
 
             systemHandling_pub.publish(msg);
             ros::spinOnce;
